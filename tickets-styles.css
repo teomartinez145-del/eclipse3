@@ -1,0 +1,457 @@
+/* =========================================================
+   Eclipse Entertainment – Tickets page (tickets.html)
+   Uses main-styles.css (header, footer, buttons) and
+   seating-styles.css (hero, layout, steps)
+   Screen sizes: Phone 0–767px · Small phone 0–480px ·
+                 Tablet 768–1023px · Desktop 1024px and up
+   ========================================================= */
+
+/* ================= LAYOUT: no right column ================= */
+
+.tickets-page .booking-inner {
+  grid-template-columns: 280px 1fr;
+}
+
+/* ================= STEPS: completed steps ================= */
+
+.step.done {
+  color: #bdb7c9;
+}
+
+.step.done span {
+  background: var(--purple);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ================= LEFT: EMAIL ================= */
+
+.email-box {
+  margin-top: 34px;
+}
+
+.email-box h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.email-box input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.email-box input::placeholder {
+  color: #6f6980;
+}
+
+.email-box input:focus {
+  border-color: var(--gold);
+}
+
+.email-box button {
+  margin-top: 14px;
+  padding: 12px 40px;
+}
+
+.email-message {
+  min-height: 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.email-message.ok {
+  color: #7ee2a8;
+}
+
+.email-message.error {
+  color: #ff8080;
+}
+
+/* ================= SUCCESS BANNER ================= */
+
+.success-banner {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+  padding: 14px 18px;
+  border: 1px solid rgba(126, 226, 168, 0.35);
+  border-radius: 8px;
+  background: rgba(126, 226, 168, 0.08);
+}
+
+.success-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #7ee2a8;
+  color: #0d0b12;
+  font-weight: 700;
+}
+
+.success-banner strong {
+  font-size: 15px;
+}
+
+.success-banner p {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #bdb7c9;
+}
+
+/* ================= TICKETS ================= */
+
+.ticket-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ticket {
+  display: flex;
+  min-width: 0;
+  min-height: 170px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+  animation: ticketIn 0.45s ease backwards;
+}
+
+/* White stub (left part) */
+.ticket-stub {
+  position: relative;
+  flex: 0 0 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  background: #fff;
+  color: #16131c;
+}
+
+/* Perforated edge between stub and main part */
+.ticket-stub::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  right: -1px;
+  border-right: 2px dashed #d7d2de;
+}
+
+.stub-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.barcode {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin: 10px 0 4px;
+  fill: #16131c;
+}
+
+.stub-number {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.stub-name {
+  margin-top: 8px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* Main part (right) with the poster behind */
+.ticket-main {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px 14px;
+  overflow: hidden;
+  background: var(--purple-dark);
+  color: #fff;
+}
+
+.ticket-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 25%;
+  filter: saturate(1.1);
+}
+
+.ticket-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to right, rgba(21, 18, 28, 0.92) 0%, rgba(21, 18, 28, 0.75) 45%, rgba(59, 26, 85, 0.25) 100%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 60%);
+}
+
+.ticket-main > *:not(.ticket-bg) {
+  position: relative;
+  z-index: 2;
+}
+
+.ticket-logo {
+  position: absolute !important;
+  top: 10px;
+  right: 14px;
+  height: 34px;
+  width: auto;
+}
+
+.ticket-format {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.ticket-title {
+  margin: 14px 0 auto;
+  padding-right: 80px;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ticket-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+  margin-top: 14px;
+}
+
+.ticket-details span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ticket-details strong {
+  font-family: 'Oswald', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.ticket-details small {
+  margin-left: 2px;
+  font-size: 12px;
+}
+
+/* ================= ACTIONS ================= */
+
+.ticket-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.ticket-actions .btn-outline {
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* ---------- PHONE + TABLET: 1023px and down ---------- */
+@media (max-width: 1023px) {
+  /* This page has no fixed bottom bar */
+  body.tickets-page {
+    padding-bottom: 0;
+  }
+
+  .tickets-page .booking-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tickets-page .booking-left {
+    order: 2;
+  }
+
+  .tickets-page .booking-center {
+    order: 1;
+  }
+
+  .email-box {
+    margin-top: 10px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* 16px or more = iPhone doesn't zoom in when typing */
+  .email-box input {
+    font-size: 16px;
+  }
+}
+
+/* ---------- PHONE: 767px and down ----------
+   Ticket turns vertical: poster part on top, barcode stub below */
+@media (max-width: 767px) {
+  .ticket {
+    flex-direction: column-reverse;
+  }
+
+  .ticket-stub {
+    flex-basis: auto;
+  }
+
+  .ticket-stub::after {
+    top: -1px;
+    bottom: auto;
+    left: 8px;
+    right: 8px;
+    border-right: 0;
+    border-top: 2px dashed #d7d2de;
+  }
+
+  .barcode {
+    height: 52px;
+  }
+
+  .ticket-main {
+    min-height: 170px;
+  }
+
+  .ticket-details {
+    gap: 10px 22px;
+  }
+
+  .ticket-details strong {
+    font-size: 22px;
+  }
+
+  .success-banner {
+    padding: 12px 14px;
+  }
+
+  .ticket-actions {
+    flex-direction: column;
+  }
+
+  .ticket-actions > * {
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .email-box button {
+    width: 100%;
+    padding: 14px 20px;
+  }
+}
+
+/* ---------- SMALL PHONE: 480px and down ---------- */
+@media (max-width: 480px) {
+  .ticket-main {
+    padding: 12px 16px 14px;
+  }
+
+  .ticket-title {
+    padding-right: 64px;
+  }
+
+  .ticket-logo {
+    height: 28px;
+  }
+
+  .ticket-details {
+    gap: 8px 16px;
+  }
+
+  .ticket-details strong {
+    font-size: 20px;
+  }
+
+  .stub-top {
+    font-size: 9px;
+  }
+}
+
+/* ================= PRINT: only the tickets ================= */
+
+@media print {
+  .main-header,
+  .seat-hero,
+  .booking-left,
+  .steps,
+  .success-banner,
+  .ticket-actions,
+  .site-footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .booking {
+    padding: 0;
+  }
+
+  .tickets-page .booking-inner {
+    display: block;
+  }
+
+  .ticket {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    margin-bottom: 14px;
+    animation: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

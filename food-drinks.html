@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snack Studio – Food &amp; Drinks | Eclipse Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main-styles.css" />
+  <link rel="stylesheet" href="food-styles.css" />
+</head>
+<body class="food-page">
+
+  <!-- ================= HEADER ================= -->
+  <header class="main-header" id="mainHeader">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.png" alt="Eclipse Entertainment" class="logo">
+    </a>
+
+    <div class="header-menu" id="headerMenu">
+      <nav class="nav-links" aria-label="Main">
+        <a href="#">Find a Theatre</a>
+        <a href="food-drinks.html" class="active" aria-current="page">Food & Drinks</a>
+        <div class="dropdown" id="moreDropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">More <span class="caret">▼</span></a>
+          <div class="dropdown-content">
+            <a href="find jobs.html">Find Jobs</a>
+            <a href="combo-offers.html">Combo Offers</a>
+            <a href="#">Gift Cards</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="search-section">
+        <input type="search" id="searchInput" placeholder="Search movies" aria-label="Search movies">
+        <span class="icon" aria-hidden="true">🔍</span>
+      </div>
+    </div>
+
+    <div class="user-icons">
+      <div class="icon-wrapper">
+        <img src="images/ticket.png" alt="Tickets" title="Tickets">
+        <span>Tickets</span>
+      </div>
+      <div class="icon-wrapper">
+        <img src="images/user.png" alt="User" title="Sign In">
+        <span>User</span>
+      </div>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="food-hero">
+    <div class="food-hero-inner">
+      <p class="hero-eyebrow">Dine-in <span>•</span> Delivered to your seat</p>
+      <h1 class="hero-title">Snack Studio</h1>
+      <p class="hero-tagline">Food paired with your movie, built your way, and brought to your seat at the exact minute you choose.</p>
+
+      <div class="hero-steps">
+        <a href="#pairing"><span>1</span>Pair it</a>
+        <a href="#menu"><span>2</span>Pick a mood</a>
+        <a href="#popcorn"><span>3</span>Build popcorn</a>
+        <a href="#delivery"><span>4</span>Choose the minute</a>
+      </div>
+
+      <p class="seat-banner" id="seatBanner" hidden></p>
+    </div>
+  </section>
+
+  <!-- ================= STUDIO ================= -->
+  <div class="studio">
+    <main class="studio-main">
+
+      <!-- 1. MOVIE PAIRING -->
+      <section class="studio-section" id="pairing">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <div>
+            <h2>Movie pairing</h2>
+            <p>Pick your movie and we'll pair it with a combo made for it.</p>
+          </div>
+        </div>
+
+        <div class="movie-picker" id="moviePicker" role="radiogroup" aria-label="Choose your movie"></div>
+
+        <article class="pairing-card" id="pairingCard">
+          <div class="pairing-photo">
+            <img src="images/image (11).png" alt="Combo">
+            <span class="pairing-icon" id="pairingIcon">🍿</span>
+          </div>
+          <div class="pairing-body">
+            <p class="pairing-for" id="pairingFor">Paired with</p>
+            <h3 id="pairingName">Classic Movie Night</h3>
+            <p class="pairing-note" id="pairingNote"></p>
+            <ul class="pairing-list" id="pairingList"></ul>
+            <div class="pairing-foot">
+              <strong class="price" id="pairingPrice">$0</strong>
+              <button type="button" class="btn-primary" id="addPairing">Add pairing to tray</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 2. SNACK MOOD -->
+      <section class="studio-section" id="menu">
+        <div class="section-head">
+          <span class="section-num">02</span>
+          <div>
+            <h2>What's your snack mood?</h2>
+            <p>Tap a mood and the menu rearranges itself around your craving.</p>
+          </div>
+        </div>
+
+        <div class="mood-bar" id="moodBar" role="tablist" aria-label="Snack mood"></div>
+        <div class="menu-grid" id="menuGrid"></div>
+      </section>
+
+      <!-- 3. BUILD YOUR POPCORN -->
+      <section class="studio-section" id="popcorn">
+        <div class="section-head">
+          <span class="section-num">03</span>
+          <div>
+            <h2>Build your popcorn</h2>
+            <p>Mix up to three flavors and watch your bucket fill up.</p>
+          </div>
+        </div>
+
+        <div class="popcorn-builder">
+          <div class="bucket-stage">
+            <div class="bucket" id="bucket">
+              <div class="bucket-fill" id="bucketFill"></div>
+              <div class="bucket-toppings" id="bucketToppings"></div>
+              <div class="bucket-body">
+                <span class="bucket-label">ECLIPSE</span>
+              </div>
+            </div>
+            <p class="bucket-caption" id="bucketCaption">Large · Butter</p>
+          </div>
+
+          <div class="popcorn-options">
+            <div class="option-group">
+              <h3>Size</h3>
+              <div class="chip-row" id="sizeOptions"></div>
+            </div>
+
+            <div class="option-group">
+              <h3>Flavors <small id="flavorHint">(up to 3 · first one free)</small></h3>
+              <div class="chip-row" id="flavorOptions"></div>
+            </div>
+
+            <div class="option-group">
+              <h3>Toppings</h3>
+              <div class="chip-row" id="toppingOptions"></div>
+            </div>
+
+            <div class="popcorn-foot">
+              <strong class="price" id="popcornPrice">$0</strong>
+              <button type="button" class="btn-primary" id="addPopcorn">Add popcorn to tray</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. DELIVER AT MINUTE -->
+      <section class="studio-section delivery-section" id="delivery">
+        <div class="section-head">
+          <span class="section-num">04</span>
+          <div>
+            <h2>Deliver at minute…</h2>
+            <p>Choose exactly when your food arrives. We'll bring it quietly to your seat.</p>
+          </div>
+        </div>
+
+        <div class="delivery-card">
+          <div class="delivery-top">
+            <p class="delivery-movie" id="deliveryMovie">Wonka · 1 hr 56 min</p>
+            <p class="delivery-readout" id="deliveryReadout">Arrives when the movie starts</p>
+          </div>
+
+          <div class="filmstrip" id="filmstrip">
+            <div class="filmstrip-track">
+              <div class="filmstrip-trailers" id="trailerZone"><span>Trailers</span></div>
+              <div class="filmstrip-progress" id="filmProgress"></div>
+            </div>
+            <input type="range" id="deliveryRange" min="-20" max="116" value="0" step="1" aria-label="Delivery minute">
+            <div class="filmstrip-marker" id="filmMarker">
+              <span id="markerLabel">0'</span>
+            </div>
+          </div>
+
+          <div class="filmstrip-scale">
+            <span>Trailers</span>
+            <span>Start</span>
+            <span id="scaleHalf">58'</span>
+            <span id="scaleEnd">116'</span>
+          </div>
+
+          <div class="preset-row" id="presetRow">
+            <button type="button" class="preset" data-preset="trailers">🎬 During trailers</button>
+            <button type="button" class="preset active" data-preset="start">▶️ Movie starts</button>
+            <button type="button" class="preset" data-preset="half">⏸️ Halfway</button>
+            <button type="button" class="preset" data-preset="final">🏁 Final act</button>
+          </div>
+
+          <div class="seat-picker">
+            <span class="seat-picker-label">Deliver to</span>
+            <label>
+              <span class="sr-only">Row</span>
+              <select id="rowSelect"></select>
+            </label>
+            <label>
+              <span class="sr-only">Seat</span>
+              <select id="seatSelect"></select>
+            </label>
+            <p class="seat-hint" id="seatHint">Your seat number is on your ticket.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= TRAY (sticky) ================= -->
+    <aside class="tray-panel" id="trayPanel" aria-label="Your tray">
+      <button type="button" class="tray-toggle" id="trayToggle" aria-expanded="false" aria-controls="trayPanel">
+        <span class="tray-toggle-count" id="trayToggleCount">0</span>
+        <span>Your tray</span>
+        <strong id="trayToggleTotal">$0</strong>
+      </button>
+
+      <div class="tray-content">
+        <h2 class="tray-title">Your tray</h2>
+
+        <div class="tray-visual" id="trayVisual">
+          <p class="tray-empty" id="trayEmpty">Add something and it lands here 👇</p>
+        </div>
+
+        <ul class="tray-list" id="trayList"></ul>
+
+        <div class="tray-delivery" id="trayDelivery">
+          <span>🕒</span>
+          <p id="trayDeliveryText">Arrives when the movie starts</p>
+        </div>
+
+        <div class="tray-total">
+          <span>Total</span>
+          <strong id="trayTotal">$0</strong>
+        </div>
+
+        <button type="button" class="btn-primary tray-checkout" id="checkoutBtn" disabled>Place order</button>
+        <button type="button" class="tray-clear" id="clearTray">Clear tray</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ================= CHECKOUT (demo) ================= -->
+  <div class="modal" id="checkoutModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+
+      <!-- Step: review -->
+      <div class="modal-step" id="stepReview">
+        <p class="modal-eyebrow">Checkout</p>
+        <h2 id="modalTitle">Review your order</h2>
+
+        <ul class="modal-list" id="modalList"></ul>
+
+        <div class="modal-info">
+          <div><span>Deliver to</span><strong id="modalSeat">—</strong></div>
+          <div><span>When</span><strong id="modalWhen">—</strong></div>
+        </div>
+
+        <div class="modal-total">
+          <span>Total</span>
+          <strong id="modalTotal">$0</strong>
+        </div>
+
+        <p class="demo-note"><strong>Demo – no real payment.</strong> Nothing is charged and no card is needed.</p>
+
+        <button type="button" class="btn-primary modal-pay" id="placeOrder">Place order</button>
+      </div>
+
+      <!-- Step: confirmed -->
+      <div class="modal-step" id="stepDone" hidden>
+        <div class="done-icon" aria-hidden="true">✓</div>
+        <h2>Order confirmed!</h2>
+        <p class="done-number">Order <strong id="orderNumber">#0000</strong></p>
+        <p class="done-text" id="doneText">We'll bring it to your seat.</p>
+        <button type="button" class="btn-primary" data-close>Back to Snack Studio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Eclipse Entertainment" class="footer-logo">
+        <p>Dine-in theatre. Movies, food and drinks, all from your seat.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Company</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="find jobs.html">Careers</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Movies</h4>
+        <a href="index.html#showtimes">Showtimes</a>
+        <a href="#">Theatres</a>
+        <a href="#">3D</a>
+        <a href="#">IMAX</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Events</h4>
+        <a href="#">Groups and Events</a>
+        <a href="#">Birthday Parties</a>
+        <a href="#">Private Watch Party</a>
+        <a href="#">Private Screenings</a>
+        <a href="#">Film Festivals</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year">2025</span> Eclipse Entertainment Dine-In Theatre.</p>
+    </div>
+  </footer>
+
+  <script src="movie-list.js"></script>
+  <script src="menu.js"></script>
+  <script src="food-menu.js"></script>
+  <script src="food.js"></script>
+</body>
+</html>

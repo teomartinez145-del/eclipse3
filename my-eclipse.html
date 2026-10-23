@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Eclipse | Eclipse Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main-styles.css" />
+  <link rel="stylesheet" href="my-eclipse-styles.css" />
+</head>
+<body class="account-page">
+
+  <!-- ================= HEADER ================= -->
+  <header class="main-header" id="mainHeader">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.png" alt="Eclipse Entertainment" class="logo">
+    </a>
+
+    <div class="header-menu" id="headerMenu">
+      <nav class="nav-links" aria-label="Main">
+        <a href="find-theatre.html">Find a Theatre</a>
+        <a href="food-drinks.html">Food & Drinks</a>
+        <div class="dropdown" id="moreDropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">More <span class="caret">▼</span></a>
+          <div class="dropdown-content">
+            <a href="find jobs.html">Find Jobs</a>
+            <a href="combo-offers.html">Combo Offers</a>
+            <a href="#">Gift Cards</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="search-section">
+        <input type="search" id="searchInput" placeholder="Search movies" aria-label="Search movies">
+        <span class="icon" aria-hidden="true">🔍</span>
+      </div>
+    </div>
+
+    <div class="user-icons">
+      <div class="icon-wrapper">
+        <img src="images/ticket.png" alt="Tickets" title="Tickets">
+        <span>Tickets</span>
+      </div>
+      <div class="icon-wrapper">
+        <img src="images/user.png" alt="User" title="Sign In">
+        <span>User</span>
+      </div>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- =========================================================
+       SIGN IN (shown when there is no account yet)
+       ========================================================= -->
+  <section class="auth" id="authView" hidden>
+    <div class="auth-glow" aria-hidden="true"></div>
+
+    <div class="auth-card" id="authCard">
+      <div class="auth-step" id="authForm">
+        <p class="hero-eyebrow">My Eclipse</p>
+        <h1 class="auth-title">Join the Eclipse</h1>
+        <p class="auth-sub">Keep your tickets, earn rewards and manage your plan. Just your name and email – no password needed.</p>
+
+        <form id="signupForm" novalidate>
+          <div class="form-summary" id="formSummary" role="alert" hidden></div>
+
+          <div class="field" id="field-name">
+            <label for="nameInput">Full name</label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">👤</span>
+              <input type="text" id="nameInput" placeholder="e.g. Mateo Martinez" autocomplete="name" aria-describedby="nameMsg">
+              <span class="input-state" aria-hidden="true"></span>
+            </div>
+            <p class="field-msg" id="nameMsg">First and last name, like <strong>Mateo Martinez</strong>.</p>
+          </div>
+
+          <div class="field" id="field-email">
+            <label for="emailInput">Email</label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">✉️</span>
+              <input type="email" id="emailInput" placeholder="e.g. mateo@gmail.com" autocomplete="email" aria-describedby="emailMsg">
+              <span class="input-state" aria-hidden="true"></span>
+            </div>
+            <p class="field-msg" id="emailMsg">We'll send your tickets here, like <strong>mateo@gmail.com</strong>.</p>
+          </div>
+
+          <div class="field field-check" id="field-terms">
+            <label class="check">
+              <input type="checkbox" id="termsInput" aria-describedby="termsMsg">
+              <span class="check-box" aria-hidden="true"></span>
+              <span>I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></span>
+            </label>
+            <p class="field-msg" id="termsMsg"></p>
+          </div>
+
+          <button type="submit" class="btn-primary auth-btn" id="signupBtn">
+            <span class="btn-label">Create my account</span>
+          </button>
+        </form>
+
+        <div class="divider"><span>or</span></div>
+
+        <button type="button" class="demo-btn" id="demoAccountBtn">✨ Use the demo account</button>
+
+        <!-- Demo helpers to show the validation messages -->
+        <div class="error-demo">
+          <p>Show me what happens with…</p>
+          <div class="error-chips">
+            <button type="button" data-demo="empty">An empty form</button>
+            <button type="button" data-demo="short">A short name</button>
+            <button type="button" data-demo="numbers">Numbers in the name</button>
+            <button type="button" data-demo="noat">An email without @</button>
+            <button type="button" data-demo="nodomain">An email without domain</button>
+            <button type="button" data-demo="typo">A typo (gmial.com)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Welcome animation -->
+      <div class="auth-step welcome" id="authWelcome" hidden>
+        <div class="welcome-moon" aria-hidden="true"><span>🌑</span></div>
+        <h2 id="welcomeTitle">Welcome, Mateo!</h2>
+        <p>Your account is ready. Loading My Eclipse…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       DASHBOARD
+       ========================================================= -->
+  <div id="dashView" hidden>
+
+    <!-- Profile -->
+    <section class="profile">
+      <div class="profile-inner">
+        <div class="avatar" id="avatar">ME</div>
+
+        <div class="profile-info">
+          <p class="hero-eyebrow">My Eclipse</p>
+          <h1 id="helloName">Hi, Mateo 👋</h1>
+          <p class="profile-meta"><span id="profileEmail"></span> · Member since <span id="memberSince"></span></p>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-label">Tier</span>
+            <strong class="stat-value" id="tierPill">🌑 New Moon</strong>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Points</span>
+            <strong class="stat-value"><span id="pointsCount">0</span> pts</strong>
+          </div>
+          <div class="profile-actions">
+            <button type="button" class="ghost-btn" id="loadDemoBtn">✨ Load demo data</button>
+            <button type="button" class="ghost-btn" id="signOutBtn">Sign out</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="My Eclipse sections">
+        <button type="button" class="tab" role="tab" data-tab="tickets" id="tab-tickets" aria-controls="panel-tickets">🎟️ Tickets <span class="tab-count" id="ticketCount">0</span></button>
+        <button type="button" class="tab" role="tab" data-tab="rewards" id="tab-rewards" aria-controls="panel-rewards">🌕 Rewards</button>
+        <button type="button" class="tab" role="tab" data-tab="subscription" id="tab-subscription" aria-controls="panel-subscription">💜 Subscription</button>
+        <span class="tab-indicator" id="tabIndicator" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <main class="dash">
+
+      <!-- ================= TICKETS ================= -->
+      <section class="panel" id="panel-tickets" role="tabpanel" aria-labelledby="tab-tickets">
+        <div class="segmented" role="tablist" aria-label="Ticket list">
+          <button type="button" class="seg active" data-list="upcoming">Upcoming</button>
+          <button type="button" class="seg" data-list="past">Past</button>
+        </div>
+        <div id="ticketArea"></div>
+      </section>
+
+      <!-- ================= REWARDS ================= -->
+      <section class="panel" id="panel-rewards" role="tabpanel" aria-labelledby="tab-rewards" hidden>
+
+        <div class="moon-card">
+          <div class="moon-wrap">
+            <svg class="moon" viewBox="0 0 120 120" aria-hidden="true">
+              <defs>
+                <radialGradient id="moonLight" cx="40%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="#fff8d6"/>
+                  <stop offset="60%" stop-color="#ffd700"/>
+                  <stop offset="100%" stop-color="#c99a00"/>
+                </radialGradient>
+                <clipPath id="moonClip"><circle cx="60" cy="60" r="52"/></clipPath>
+              </defs>
+              <circle cx="60" cy="60" r="52" fill="#2a2433"/>
+              <g clip-path="url(#moonClip)">
+                <rect id="moonFill" x="8" y="112" width="104" height="104" fill="url(#moonLight)"/>
+                <circle cx="44" cy="50" r="7" fill="rgba(0,0,0,0.12)"/>
+                <circle cx="74" cy="72" r="10" fill="rgba(0,0,0,0.1)"/>
+                <circle cx="70" cy="38" r="4" fill="rgba(0,0,0,0.1)"/>
+              </g>
+              <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="moon-info">
+            <p class="moon-tier" id="moonTier">🌓 Half Moon</p>
+            <p class="moon-points"><strong id="moonPoints">0</strong> points to spend</p>
+            <div class="tier-bar"><span id="tierBar"></span></div>
+            <p class="moon-next" id="moonNext"></p>
+            <ol class="tier-ladder" id="tierLadder"></ol>
+          </div>
+        </div>
+
+        <h2 class="section-title">Redeem rewards</h2>
+        <div class="reward-grid" id="rewardGrid"></div>
+
+        <div class="coupon-box" id="couponBox" hidden>
+          <h2 class="section-title">My coupons</h2>
+          <ul class="coupon-list" id="couponList"></ul>
+        </div>
+
+        <div class="rewards-split">
+          <div>
+            <h2 class="section-title">Badges</h2>
+            <div class="badge-grid" id="badgeGrid"></div>
+          </div>
+          <div>
+            <h2 class="section-title">Points history</h2>
+            <ul class="history" id="historyList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SUBSCRIPTION ================= -->
+      <section class="panel" id="panel-subscription" role="tabpanel" aria-labelledby="tab-subscription" hidden>
+        <div id="currentPlan"></div>
+
+        <div class="plans-head">
+          <h2 class="section-title">Choose your plan</h2>
+          <div class="billing-toggle" role="radiogroup" aria-label="Billing">
+            <button type="button" class="bill active" data-billing="monthly" role="radio" aria-checked="true">Monthly</button>
+            <button type="button" class="bill" data-billing="yearly" role="radio" aria-checked="false">Yearly <small>2 months free</small></button>
+            <span class="bill-slider" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="plan-grid" id="planGrid"></div>
+        <p class="demo-note"><strong>Demo – no real payment.</strong> Choosing or canceling a plan never charges anything.</p>
+      </section>
+    </main>
+  </div>
+
+  <!-- ================= MODAL (shared) ================= -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" data-close aria-label="Close">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Toasts + confetti -->
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Eclipse Entertainment" class="footer-logo">
+        <p>Dine-in theatre. Movies, food and drinks, all from your seat.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Company</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="find jobs.html">Careers</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Movies</h4>
+        <a href="index.html#showtimes">Showtimes</a>
+        <a href="find-theatre.html">Theatres</a>
+        <a href="#">3D</a>
+        <a href="#">IMAX</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Events</h4>
+        <a href="#">Groups and Events</a>
+        <a href="#">Birthday Parties</a>
+        <a href="#">Private Watch Party</a>
+        <a href="#">Private Screenings</a>
+        <a href="#">Film Festivals</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year">2025</span> Eclipse Entertainment Dine-In Theatre.</p>
+    </div>
+  </footer>
+
+  <script src="movie-list.js"></script>
+  <script src="menu.js"></script>
+  <script src="account-data.js"></script>
+  <script src="my-eclipse.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#15121c" />
+  <title>Your Tickets | Eclipse Entertainment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main-styles.css" />
+  <link rel="stylesheet" href="seating-styles.css" />
+  <link rel="stylesheet" href="tickets-styles.css" />
+</head>
+<body class="seats-page tickets-page">
+
+  <!-- ================= HEADER ================= -->
+  <header class="main-header" id="mainHeader">
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.png" alt="Eclipse Entertainment" class="logo">
+    </a>
+
+    <div class="header-menu" id="headerMenu">
+      <nav class="nav-links" aria-label="Main">
+        <a href="find-theatre.html">Find a Theatre</a>
+        <a href="food-drinks.html">Food &amp; Drinks</a>
+        <div class="dropdown" id="moreDropdown">
+          <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">More <span class="caret">▼</span></a>
+          <div class="dropdown-content">
+            <a href="find jobs.html">Find Jobs</a>
+            <a href="combo-offers.html">Combo Offers</a>
+            <a href="#">Gift Cards</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="search-section">
+        <input type="search" id="searchInput" placeholder="Search movies" aria-label="Search movies" enterkeyhint="search" autocomplete="off">
+        <span class="icon" aria-hidden="true">🔍</span>
+      </div>
+    </div>
+
+    <div class="user-icons">
+      <a href="my-eclipse.html#tickets" class="icon-wrapper">
+        <img src="images/ticket.png" alt="" aria-hidden="true">
+        <span>Tickets</span>
+      </a>
+      <a href="my-eclipse.html" class="icon-wrapper" id="accountLink">
+        <img src="images/user.png" alt="" aria-hidden="true">
+        <span>My Eclipse</span>
+      </a>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="headerMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="seat-hero" id="seatHero">
+    <div class="seat-hero-inner">
+      <div class="seat-hero-text">
+        <p class="seat-hero-eyebrow">Enjoy the movie</p>
+        <h1 id="movieTitle">Your tickets</h1>
+        <p class="movie-sub" id="movieSub"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TICKETS ================= -->
+  <main class="booking">
+    <div class="booking-inner" id="bookingInner">
+
+      <!-- Left: poster + email -->
+      <aside class="booking-left">
+        <div class="booking-poster">
+          <img id="moviePoster" alt="">
+        </div>
+
+        <form class="email-box" id="emailForm" novalidate>
+          <h2>Send tickets to your email?</h2>
+          <input type="email" id="emailInput" placeholder="myemail@gmail.com" aria-label="Email address" autocomplete="email" inputmode="email" enterkeyhint="send" autocapitalize="off" spellcheck="false">
+          <button type="submit" class="btn-primary">Send</button>
+          <p class="email-message" id="emailMessage" aria-live="polite"></p>
+        </form>
+      </aside>
+
+      <!-- Center: steps + tickets -->
+      <section class="booking-center" aria-label="Your tickets">
+        <ol class="steps">
+          <li class="step done"><span>✓</span><b class="step-label"><i class="step-long">Choose your </i>seats</b></li>
+          <li class="step done"><span>✓</span>Payment</li>
+          <li class="step active" aria-current="step"><span>3</span>Tickets</li>
+        </ol>
+
+        <div class="success-banner">
+          <span class="success-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>Payment complete!</strong>
+            <p id="successText">Your tickets are ready.</p>
+          </div>
+        </div>
+
+        <div class="ticket-stack" id="ticketStack"></div>
+
+        <div class="ticket-actions">
+          <button type="button" class="btn-outline" id="printBtn">Print tickets</button>
+          <a href="index.html" class="btn-primary">Back to home</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Shown when the booking info is missing -->
+    <div class="booking-error" id="bookingError" hidden>
+      <h2>Choose a showtime first</h2>
+      <p>To continue, first choose a movie, a showtime and your seats.</p>
+      <a href="index.html#showtimes" class="btn-primary">See showtimes</a>
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Eclipse Entertainment" class="footer-logo">
+        <p>Dine-in theatre. Movies, food and drinks, all from your seat.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Company</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="find jobs.html">Careers</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Movies</h4>
+        <a href="index.html#showtimes">Showtimes</a>
+        <a href="find-theatre.html">Theatres</a>
+        <a href="#">3D</a>
+        <a href="#">IMAX</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Events</h4>
+        <a href="#">Groups and Events</a>
+        <a href="#">Birthday Parties</a>
+        <a href="#">Private Watch Party</a>
+        <a href="#">Private Screenings</a>
+        <a href="#">Film Festivals</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> Eclipse Entertainment Dine-In Theatre.</p>
+    </div>
+  </footer>
+
+  <script src="movie-list.js"></script>
+  <script src="menu.js"></script>
+  <script src="tickets.js"></script>
+</body>
+</html>

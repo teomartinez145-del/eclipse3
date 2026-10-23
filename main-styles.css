@@ -1,0 +1,1233 @@
+/* =========================================================
+   Eclipse Entertainment – Main styles (main-styles.css)
+   Homepage + shared header, buttons and footer for every page
+
+   Screen sizes used on the whole site:
+     Phone        0 – 767px     @media (max-width: 767px)
+     Small phone  0 – 480px     @media (max-width: 480px)
+     Tablet     768 – 1023px    @media (min-width: 768px) and (max-width: 1023px)
+     Desktop   1024px and up    (default styles)
+     Large     1440px and up    @media (min-width: 1440px)
+   ========================================================= */
+
+:root {
+  --purple: #652e8d;
+  --purple-dark: #3b1a55;
+  --gold: #ffd700;
+  --gold-hover: #ffcc00;
+  --bg: #15121c;
+  --panel: #ffffff;
+  --text: #16131c;
+  --muted: #8b8697;
+  --line: #ebe8f0;
+  --pill-off: #ece9f1;
+  --radius: 8px;
+  --header-h: 76px;
+  --content-w: 1100px;
+  --side-pad: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;   /* iPhone: don't resize text when rotating */
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Page can't scroll behind the open mobile menu */
+body.menu-locked {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ================= HEADER ================= */
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0 var(--side-pad);
+  padding-left: max(var(--side-pad), env(safe-area-inset-left));
+  padding-right: max(var(--side-pad), env(safe-area-inset-right));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-header.scrolled,
+.main-header.menu-open {
+  background: rgba(10, 8, 14, 0.97);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.logo-link {
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+}
+
+.header-menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:focus-visible {
+  color: var(--gold);
+}
+
+.caret {
+  font-size: 9px;
+  margin-left: 4px;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  min-width: 180px;
+  background: rgba(10, 8, 14, 0.97);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 6px 6px;
+  padding: 8px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+/* invisible bridge so the menu doesn't close while moving the mouse down */
+.dropdown-content::before {
+  content: '';
+  position: absolute;
+  top: -17px;
+  left: 0;
+  right: 0;
+  height: 14px;
+}
+
+.dropdown.open .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Search */
+.search-section {
+  position: relative;
+  width: 280px;
+}
+
+.search-section input {
+  -webkit-appearance: none;   /* Safari: allow rounded custom style */
+  appearance: none;
+  width: 100%;
+  height: 38px;
+  padding: 0 38px 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+/* hide the browser's own "x" / search icon so ours is the only one */
+.search-section input::-webkit-search-decoration,
+.search-section input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.search-section input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.search-section input:focus {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.search-section .icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+/* User icons */
+.user-icons {
+  display: flex;
+  gap: 22px;
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 44px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-wrapper img {
+  width: 22px;
+  height: 22px;
+}
+
+/* Hamburger (phone + tablet only) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.main-header.menu-open .menu-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.main-header.menu-open .menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.main-header.menu-open .menu-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  position: relative;
+  min-height: 560px;
+  padding: calc(var(--header-h) + 70px) var(--side-pad) 150px;
+  background:
+    linear-gradient(to bottom,
+      rgba(59, 26, 85, 0.55) 0%,
+      rgba(101, 46, 141, 0.55) 45%,
+      var(--bg) 100%),
+    url('images/image.png') center/cover no-repeat;
+  color: #fff;
+}
+
+.hero-inner {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  animation: fadeSlideUp 0.9s ease-out both;
+}
+
+.hero-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.hero-eyebrow span {
+  margin: 0 6px;
+  opacity: 0.7;
+}
+
+.hero-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-tagline {
+  max-width: 520px;
+  margin: 16px 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 26px;
+  background: var(--gold);
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+/* Date strip */
+.date-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 44px;
+}
+
+.date-list {
+  flex: 1;
+  min-width: 0;   /* lets the strip shrink and scroll instead of pushing the page wider */
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  padding: 6px 2px;
+}
+
+.date-list::-webkit-scrollbar {
+  display: none;
+}
+
+.date-btn {
+  flex: 0 0 92px;
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(4px);   /* Safari */
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.date-btn.active {
+  background: var(--gold);
+  color: #000;
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.35);
+}
+
+.date-top {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.date-day {
+  font-family: 'Oswald', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.date-arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--purple);
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.date-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ================= SHOWTIMES PANEL ================= */
+
+.showtimes {
+  position: relative;
+  z-index: 2;
+  margin-top: -80px;
+  padding: 0 var(--side-pad) 90px;
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.showtimes-panel {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 44px 48px 56px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.clock-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--purple);
+  border-radius: 50%;
+}
+
+.clock-icon::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 2px;
+  height: 5px;
+  background: var(--purple);
+}
+
+.clock-icon::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  width: 4px;
+  height: 2px;
+  background: var(--purple);
+}
+
+.panel-heading h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.heading-line {
+  flex: 1;
+  height: 1px;
+  background: var(--purple);
+  opacity: 0.35;
+}
+
+.showtime-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+}
+
+/* Movie card */
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(20, 10, 40, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: cardIn 0.5s ease backwards;
+}
+
+.movie-card[hidden] {
+  display: none;
+}
+
+.poster {
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: #222;
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 20px;
+}
+
+.genre {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.movie-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: uppercase;
+  min-height: 46px;
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.rating {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  padding: 3px 10px;
+  border: 1px solid #cfcad8;
+  border-radius: 20px;
+}
+
+.duration {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.format-switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.format-arrow {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--purple);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.format-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.format-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.times {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-content: start;
+}
+
+.time-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border-radius: 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  white-space: nowrap;
+  text-decoration: none;
+  background: var(--purple);
+  color: #fff;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.time-pill.is-past {
+  background: var(--pill-off);
+  color: #b2adbc;
+  cursor: not-allowed;
+}
+
+/* Synopsis & trailers */
+.details-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  padding: 0 0 0 20px;
+  border: 0;
+  background: #eef0f4;
+  cursor: pointer;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: left;
+}
+
+.details-toggle .plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--text);
+  color: var(--gold);
+  font-size: 18px;
+  transition: background 0.2s ease;
+}
+
+.details-toggle .plus::before {
+  content: '+';
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.details-toggle[aria-expanded="true"] .plus::before {
+  transform: rotate(45deg);
+}
+
+.details {
+  display: grid;
+  grid-template-rows: 0fr;
+  background: #f7f6fa;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.details.open {
+  grid-template-rows: 1fr;
+}
+
+.details-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.details-content {
+  padding: 16px 20px 18px;
+}
+
+.details-content p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #4a4555;
+}
+
+.trailer-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 0 10px;
+  color: var(--muted);
+}
+
+/* ================= FOOTER ================= */
+
+.site-footer {
+  background: #0d0b12;
+  color: #cfcad8;
+  padding: 70px var(--side-pad) 0;
+  padding-bottom: env(safe-area-inset-bottom);   /* iPhone home bar */
+  border-top: 3px solid;
+  border-image: linear-gradient(to right, var(--purple), var(--gold)) 1;
+}
+
+.footer-container {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 50px;
+}
+
+.footer-logo {
+  height: 46px;
+  width: auto;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  max-width: 260px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #8f8a9b;
+}
+
+.footer-col h4 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.footer-col a {
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 5px 0;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #cfcad8;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 22px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #8f8a9b;
+}
+
+/* ================= HOVER EFFECTS =================
+   Only for devices with a real mouse, so effects don't
+   "stick" after tapping on phones and tablets */
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-links a:hover {
+    color: var(--gold);
+  }
+
+  .dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .icon-wrapper:hover {
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.35);
+  }
+
+  .date-btn:not(.active):hover {
+    background: rgba(255, 255, 255, 0.26);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+
+  .date-arrow:hover:not(:disabled) {
+    background: var(--gold);
+    color: #000;
+    transform: scale(1.08);
+  }
+
+  .movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(20, 10, 40, 0.2);
+  }
+
+  .movie-card:hover .poster img {
+    transform: scale(1.05);
+  }
+
+  .format-arrow:hover:not(:disabled) {
+    background: var(--pill-off);
+  }
+
+  a.time-pill:hover {
+    background: var(--gold);
+    color: #000;
+    transform: translateY(-2px);
+  }
+
+  .details-toggle:hover .plus {
+    background: var(--purple);
+  }
+
+  .footer-col a:hover {
+    color: #fff;
+    transform: translateX(4px);
+  }
+}
+
+/* Touch feedback: a quick press effect instead of hover */
+.btn-primary:active,
+a.time-pill:active,
+.date-btn:active,
+.date-arrow:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  html,
+  .date-list {
+    scroll-behavior: auto;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* ---------- LARGE SCREENS: 1440px and up ---------- */
+@media (min-width: 1440px) {
+  :root {
+    --content-w: 1280px;
+    --side-pad: 60px;
+  }
+
+  .hero {
+    min-height: 620px;
+  }
+
+  .showtime-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+  }
+}
+
+/* ---------- SMALL DESKTOP: 1024px – 1199px ---------- */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .main-header {
+    gap: 24px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .search-section {
+    width: 190px;
+  }
+
+  .showtimes-panel {
+    padding: 40px 36px 48px;
+  }
+
+  .showtime-grid {
+    gap: 24px;
+  }
+}
+
+/* ---------- PHONE + TABLET: 1023px and down ----------
+   Header turns into the hamburger menu */
+@media (max-width: 1023px) {
+  :root {
+    --side-pad: 28px;
+  }
+
+  .main-header {
+    gap: 16px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .user-icons {
+    margin-left: auto;
+  }
+
+  .header-menu {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 20px var(--side-pad) 28px;
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));   /* iPhone/Android: respects the browser bars */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: rgba(10, 8, 14, 0.98);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  }
+
+  .main-header.menu-open .header-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .search-section {
+    order: -1;
+    width: 100%;
+  }
+
+  .search-section input {
+    height: 44px;
+    font-size: 16px;   /* 16px or more = iPhone doesn't zoom in when typing */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav-links > a,
+  .dropdown-toggle {
+    display: block;
+    padding: 14px 4px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border-top: 0;
+    box-shadow: none;
+    background: transparent;
+    padding: 0 0 8px 14px;
+  }
+
+  .dropdown.open .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+
+  .dropdown-content::before {
+    display: none;
+  }
+}
+
+/* ---------- TABLET: 768px – 1023px ---------- */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero {
+    min-height: 520px;
+    padding-top: calc(var(--header-h) + 60px);
+  }
+
+  .showtimes-panel {
+    padding: 36px 32px 44px;
+  }
+
+  .showtime-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+  }
+
+  .time-pill {
+    height: 38px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- PHONE: 767px and down ---------- */
+@media (max-width: 767px) {
+  :root {
+    --header-h: 64px;
+    --side-pad: 20px;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .user-icons {
+    gap: 12px;
+  }
+
+  .icon-wrapper span {
+    display: none;
+  }
+
+  .icon-wrapper {
+    justify-content: center;
+    height: 44px;
+  }
+
+  .icon-wrapper img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: calc(var(--header-h) + 40px) var(--side-pad) 120px;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+  }
+
+  .date-strip {
+    margin-top: 32px;
+    /* strip reaches the screen edge so you can tell it scrolls */
+    margin-right: calc(var(--side-pad) * -1);
+  }
+
+  .date-arrow {
+    display: none;
+  }
+
+  .date-btn {
+    flex-basis: 72px;
+    height: 76px;
+  }
+
+  .date-day {
+    font-size: 24px;
+  }
+
+  .showtimes {
+    margin-top: -70px;
+    padding: 0 12px 60px;
+  }
+
+  .showtimes-panel {
+    padding: 28px 18px 36px;
+  }
+
+  .panel-heading {
+    margin-bottom: 24px;
+  }
+
+  .panel-heading h2 {
+    white-space: normal;
+  }
+
+  .showtime-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 26px;
+  }
+
+  .time-pill {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .format-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .site-footer {
+    padding-top: 50px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-bottom: 36px;
+  }
+}
+
+/* ---------- SMALL PHONE: 480px and down (iPhone SE, small Android) ---------- */
+@media (max-width: 480px) {
+  .logo {
+    height: 34px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .hero-eyebrow span {
+    margin: 0 3px;
+  }
+
+  .btn-primary {
+    display: block;
+    text-align: center;
+    padding: 14px 20px;
+  }
+
+  .date-btn {
+    flex-basis: 66px;
+    height: 72px;
+  }
+
+  .date-top {
+    font-size: 11px;
+  }
+
+  .date-day {
+    font-size: 22px;
+  }
+
+  .showtimes {
+    padding: 0 8px 50px;
+  }
+
+  .showtimes-panel {
+    padding: 24px 14px 30px;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .times {
+    gap: 8px;
+  }
+}
